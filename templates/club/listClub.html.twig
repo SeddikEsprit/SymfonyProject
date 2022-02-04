@@ -4,5 +4,7 @@ Name:{{ club.name }}
     Description:{{ club.description }}
 
 <a href="{{ path('showClub',{'id':club.id}) }}">show more</a>
+    <a href="{{ path('deleteClub',{'id':club.id}) }}"> Delete</a>
+    <a href="#"> Update</a>
     <br>
 {% endfor %}
