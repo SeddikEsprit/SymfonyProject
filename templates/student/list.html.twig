@@ -1,4 +1,4 @@
-<a href="#">Add Student</a>
+<a href="addStudent">Add Student</a>
 <table border="1">
     <tr>
         <td>Id</td>
@@ -17,7 +17,7 @@
             <td>{{ student.level }}</td>
             <td><a href="{{ path('showStudent',{'id':student.id}) }}">Sohw</a>
                 <a href="{{ path('deleteStudent',{'id':student.id}) }}">Remove</a>
-                <a href="#">update</a></td>
+                <a href="{{ path('updateSudent',{'id':student.id}) }}">update</a></td>
         </tr>
     {% endfor %}
 </table>
