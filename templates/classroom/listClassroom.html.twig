@@ -1,0 +1,19 @@
+<a href="addClassroom">Add Classroom</a>
+<table border="1">
+    <tr>
+        <td>ref</td>
+        <td>name</td>
+        <td>Description</td>
+
+    </tr>
+    {% for classroom in tabClassroom %}
+        <tr>
+            <td>{{ classroom.ref }}</td>
+            <td>{{ classroom.name }}</td>
+            <td>{{ classroom.description }}</td>
+            <td><a href="{{ path('showClassroom',{'ref':classroom.ref}) }}">Sohw</a>
+                <a href="{{ path('deleteClassroom',{'ref':classroom.ref}) }}">Remove</a>
+                <a href="{{ path('updateClassroom',{'ref':classroom.ref}) }}">update</a></td>
+        </tr>
+    {% endfor %}
+</table>
