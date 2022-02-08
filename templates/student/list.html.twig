@@ -6,7 +6,9 @@
         <td>Description</td>
         <td>Enabled</td>
         <td>Level</td>
+        <td>classroom</td>
         <td>Actions</td>
+
     </tr>
     {% for student in tabStudents %}
         <tr>
@@ -15,6 +17,7 @@
             <td>{{ student.description }}</td>
             <td>{{ student.enbaled }}</td>
             <td>{{ student.level }}</td>
+            <td>{{ student.classroom.name }}</td>
             <td><a href="{{ path('showStudent',{'id':student.id}) }}">Sohw</a>
                 <a href="{{ path('deleteStudent',{'id':student.id}) }}">Remove</a>
                 <a href="{{ path('updateSudent',{'id':student.id}) }}">update</a></td>

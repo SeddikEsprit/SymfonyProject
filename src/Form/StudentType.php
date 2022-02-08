@@ -17,6 +17,7 @@ class StudentType extends AbstractType
             ->add('description')
             ->add('enbaled')
             ->add('level')
+            ->add('classroom')
             ->add("submit",SubmitType::class);
         ;
     }

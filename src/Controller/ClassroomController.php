@@ -29,18 +29,18 @@ class ClassroomController extends AbstractController
         return $this->render("Classroom/listClassroom.html.twig",array("tabClassroom"=>$classrooms));
     }
     /**
-     * @Route("/showClassroom/{ref}", name="showClassroom")
+     * @Route("/showClassroom/{id}", name="showClassroom")
      */
-    public function showClassroom($ref){
+    public function showClassroom($id){
 
-        $classroom =$this->getDoctrine()->getRepository(Classroom::class)->find($ref);
+        $classroom =$this->getDoctrine()->getRepository(Classroom::class)->find($id);
         return $this->render("Classroom/showClassroom.html.twig",array("showClassroom"=>$classroom));
     }
     /**
-     * @Route("/deleteClassroom/{ref}", name="deleteClassroom")
+     * @Route("/deleteClassroom/{id}", name="deleteClassroom")
      */
-    public function deleteClassroom($ref){
-        $classroom =$this->getDoctrine()->getRepository(Classroom::class)->find($ref);
+    public function deleteClassroom($id){
+        $classroom =$this->getDoctrine()->getRepository(Classroom::class)->find($id);
         $em=$this->getDoctrine()->getManager();
         $em->remove($classroom);
         $em->flush();
@@ -63,10 +63,10 @@ class ClassroomController extends AbstractController
         return $this->render("classroom/addClassroom.html.twig",array('addClassroom'=>$form->createView()));
     }
     /**
-     * @Route("/updateClassroom/{ref}", name="updateClassroom")
+     * @Route("/updateClassroom/{id}", name="updateClassroom")
      */
-    public function updateClassroom(Request $request,ClassroomRepository $repository,$ref){
-        $classroom=$repository->find($ref);
+    public function updateClassroom(Request $request,ClassroomRepository $repository,$id){
+        $classroom=$repository->find($id);
         $form=$this->createForm(ClassroomType::class,$classroom);
         $form->handleRequest($request);
         if($form->isSubmitted()){
