@@ -28,7 +28,9 @@ class StudentController extends AbstractController
     public function listStudent()
     {
         $students= $this->getDoctrine()->getRepository(Student::class)->findAll();
-        return $this->render("student/list.html.twig",array('tabStudents'=>$students));
+        $StudentOderByFirstName=$this->getDoctrine()->getRepository(Student::class)->orderByFirstNme();
+        $StudentWhereEnebled=$this->getDoctrine()->getRepository(Student::class)->findEnabledStudent();
+        return $this->render("student/list.html.twig",array('tabStudents'=>$students,'tabStudentOrderByFirstName'=>$StudentOderByFirstName,'tabStudentfindEnabledStudent'=>$StudentWhereEnebled));
     }
     /**
      * @Route("/showStudent/{id}", name="showStudent")

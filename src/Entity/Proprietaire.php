@@ -29,7 +29,7 @@ class Proprietaire
     private $numtel;
 
     /**
-     * @ORM\OneToMany(targetEntity=BienImmoblier::class, mappedBy="proprietaire")
+     * @ORM\OneToMany(targetEntity=BienImmoblier::class, mappedBy="proprietaire"cascade={"remove"})
      */
     private $bienImmos;
 

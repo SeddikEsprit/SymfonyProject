@@ -27,6 +27,6 @@ class ProprietaireController extends AbstractController
         $em->remove($proprietaire);
         $em->flush();
 
-       return $this->redirectToRoute("proprietaire");
+       return $this->redirectToRoute("addBienImmoblier");
     }
 }
