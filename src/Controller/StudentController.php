@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Student;
+use App\Form\SerchStudentType;
 use App\Form\StudentType;
 use App\Repository\StudentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,12 +26,29 @@ class StudentController extends AbstractController
     /**
      * @Route("/listStudent",name="students")
      */
-    public function listStudent()
+    public function listStudent(Request $request)
     {
         $students= $this->getDoctrine()->getRepository(Student::class)->findAll();
         $StudentOderByFirstName=$this->getDoctrine()->getRepository(Student::class)->orderByFirstNme();
         $StudentWhereEnebled=$this->getDoctrine()->getRepository(Student::class)->findEnabledStudent();
-        return $this->render("student/list.html.twig",array('tabStudents'=>$students,'tabStudentOrderByFirstName'=>$StudentOderByFirstName,'tabStudentfindEnabledStudent'=>$StudentWhereEnebled));
+
+        $searchForm= $this->createForm(SerchStudentType::class);
+        $searchForm->handleRequest($request);
+        if($searchForm->isSubmitted()){
+            $firstName= $searchForm->getData();
+            $result= $this->getDoctrine()->getRepository(Student::class)->searchStudent($firstName);
+            return $this->render("student/list.html.twig",
+                array('tabStudents'=>$result,
+                    'tabStudentOrderByFirstName'=>$StudentOderByFirstName,
+                    'tabStudentfindEnabledStudent'=>$StudentWhereEnebled,
+                    'searchForm'=>$searchForm->createView()
+                ));
+        }
+        return $this->render("student/list.html.twig",array('tabStudents'=>$students,
+            'tabStudentOrderByFirstName'=>$StudentOderByFirstName,'tabStudentfindEnabledStudent'=>$StudentWhereEnebled,
+            'searchForm'=>$searchForm->createView()
+            ));
+
     }
     /**
      * @Route("/showStudent/{id}", name="showStudent")
